@@ -1,7 +1,7 @@
 import requests
 from datetime import date
 import time
-import playsound
+# import playsound
 
 flag = 0
 i = 0
@@ -19,8 +19,8 @@ while True:
             for session in center['sessions']:
                 if session['min_age_limit'] == 18 and session['available_capacity_dose1'] > 0:
                     print('found a vaccine session')
-                    playsound.playsound(
-                        'D:/Work/Projects/MyProjects/vaccine/found.mp3', True)
+                    # playsound.playsound(
+                    #     'D:/Work/Projects/MyProjects/vaccine/found.mp3', True)
 
                     if flag == 0:
                         mail = requests.get(
