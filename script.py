@@ -9,9 +9,18 @@ while True:
     today = date.today()
     today = today.strftime("%d-%m-%y")
     # print(today)
-
-    response = requests.get(
-        f'https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=365&date={today}')
+    try:
+        response = requests.get(
+            f'https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=365&date={today}')
+    except:
+        print('Failed')
+        try:
+            mail = requests.get(
+                'https://teshank2137.pythonanywhere.com/senderror/')
+        except:
+            print('mail sent Failed')
+        finally:
+            continue
 
     response_obj = response.json()
     try:
