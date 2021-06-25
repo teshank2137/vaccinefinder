@@ -9,6 +9,7 @@ while True:
     today = date.today()
     today = today.strftime("%d-%m-%y")
     # print(today)
+    centers = [662349, 657975]
     try:
         response = requests.get(
             f'https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=445001&date={today}')
@@ -25,6 +26,8 @@ while True:
     response_obj = response.json()
     try:
         for center in response_obj['centers']:
+            if center['center_id'] not in centers:
+                continue
             for session in center['sessions']:
                 if session['min_age_limit'] == 18 and session['available_capacity_dose1'] > 0:
                     print('found a vaccine session')
@@ -38,7 +41,7 @@ while True:
                             flag = 1
                             print("Mail sent successfully")
 
-                    time.sleep(1200)
+                    time.sleep(120)
                     continue
 
     except:
